@@ -4,7 +4,7 @@ use Email::Simple;
 use 5.006;
 use strict;
 use warnings;
-our $VERSION = '1.0';
+our $VERSION = '2.0';
 use Module::Pluggable search_path => [ __PACKAGE__ ], require => 1;
 my @plugins = __PACKAGE__->plugins(); # Requires them.
 for my $func (qw(get_header get_body 
@@ -20,6 +20,11 @@ for my $func (qw(get_header get_body
         if ($class->can($func)) {
             $class->$func($thing, @args);
         } else {
+            for my $class (@plugins) { 
+                if ($class->can("target") and $thing->isa($class->target)) {
+                    return $class->$func($thing, @args);
+                }
+            }
             croak "Don't know how to handle ".ref($thing);
         }
     };
@@ -33,6 +38,11 @@ sub cast {
     if ($class->can("construct")) {
         $class->construct($thing);
     } else {
+        for my $class (@plugins) { 
+            if ($class->can("target") and $thing->isa($class->target)) {
+                return $class->construct($thing);
+            }
+        }
         croak "Don't know how to handle $class";
     }
 }

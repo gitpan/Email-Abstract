@@ -1,5 +1,6 @@
 package Email::Abstract::EmailSimple;
 use strict;
+sub target { "Email::Simple" }
 
 sub construct {
     require Email::Simple;

@@ -1,5 +1,6 @@
 package Email::Abstract::MailMessage;
 use strict;
+sub target {"Mail::Message" }
 
 sub construct {
     require Mail::Message;

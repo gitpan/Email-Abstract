@@ -1,6 +1,7 @@
 package Email::Abstract::MIMEEntity;
 use strict;
 use base 'Email::Abstract::MailInternet';
+sub target { "MIME::Entity" }
 
 sub construct {
     require MIME::Parser;

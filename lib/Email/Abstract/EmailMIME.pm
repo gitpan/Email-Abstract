@@ -1,6 +1,7 @@
 package Email::Abstract::EmailMIME;
 use strict;
 use base 'Email::Abstract::EmailSimple';
+sub target { "Email::MIME" }
 
 sub construct {
     require Email::MIME;

@@ -1,5 +1,6 @@
 package Email::Abstract::MailInternet;
 use strict;
+sub target { "Mail::Internet" }
 
 sub construct {
     require Mail::Internet;

@@ -3,6 +3,7 @@ Makefile.PL
 MANIFEST
 README
 t/1.t
+t/subclass.t
 lib/Email/Abstract/EmailMIME.pm
 lib/Email/Abstract/EmailSimple.pm
 lib/Email/Abstract/MailInternet.pm
