@@ -1,38 +1,66 @@
-Email/Abstract version 0.01
-===========================
+NAME
+    Email::Abstract - Unified interface to mail representations
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+SYNOPSIS
+      my $message = Mail::Message->read($rfc822)
+                    || Email::Simple->new($rfc822)
+                    || Mail::Internet->new([split /\n/, $rfc822])
+                    || ...;
 
-A README file is required for CPAN modules since CPAN extracts the
-README file from a module distribution so that people browsing the
-archive can use it get an idea of the modules uses. It is usually a
-good idea to provide version information here so that people can
-decide whether fixes for the module are worth downloading.
+      my $subject = Email::Abstract->get_header($message, "Subject");
+      Email::Abstract->set_header($message, "Subject", "My new subject");
 
-INSTALLATION
+      my $body = Email::Abstract->get_body($message);
+      Email::Abstract->set_body($message, "Hello\nTest message\n");
 
-To install this module type the following:
+      $rfc822 = Email::Abstract->as_string($message);
 
-   perl Makefile.PL
-   make
-   make test
-   make install
+      my $mail_message = Email::Abstract->cast($message, "Mail::Message");
 
-DEPENDENCIES
+DESCRIPTION
+    "Email::Abstract" provides module writers with the ability to write
+    representation-independent mail handling code. For instance, in the
+    cases of "Mail::Thread" or "Mail::ListDetector", a key part of the code
+    involves reading the headers from a mail object. Where previously one
+    would either have to specify the mail class required, or to build a new
+    object from scratch, "Email::Abstract" can be used to perform certain
+    simple operations on an object regardless of its underlying
+    representation.
 
-This module requires these other modules and libraries:
+    "Email::Abstract" currently supports "Mail::Internet", "MIME::Entity",
+    "Mail::Message", "Email::Simple" and "Email::MIME". Other
+    representations are encouraged to create their own "Email::Abstract::*"
+    class by copying "Email::Abstract::EmailSimple". All modules installed
+    under the "Email::Abstract" hierarchy will be automatically picked up
+    and used.
 
-  blah blah blah
+METHODS
+  get_header($obj, $header)
+    This returns the value or list of values of the given header.
 
-COPYRIGHT AND LICENCE
+  set_header($obj, $header, @lines)
+    This sets the $header header to the given one or more values.
 
-Put the correct copyright and licence information here.
+  get_body($obj)
+    This returns the body as a string.
 
-Copyright (C) 2004 Simon Cozens
+  set_body($obj, $string)
+    This changes the body of the email to the given string.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself. 
+  as_string($obj)
+    This returns the whole email as a string.
+
+AUTHOR
+    Casey West, <casey@geeknest.com>
+
+    Simon Cozens, <simon@cpan.org>
+
+COPYRIGHT AND LICENSE
+    Copyright 2004 by Simon Cozens
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
+SEE ALSO
+    http://pep.kwiki.org
 

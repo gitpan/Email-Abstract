@@ -5,8 +5,9 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME              => 'Email::Abstract',
     VERSION_FROM      => 'lib/Email/Abstract.pm', # finds $VERSION
-    PREREQ_PM         => {
-        Module::Pluggable => 0,
-        Email::Simple => 0
-    }, # e.g., Module::Name => 1.1
+               PREREQ_PM     => {
+                                 'Email::Simple' => '1.91',
+                                 'Module::Pluggable' => '1.5',
+                                 'Test::More' => '0.47',
+                                },
 );

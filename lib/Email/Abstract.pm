@@ -4,7 +4,7 @@ use Email::Simple;
 use 5.006;
 use strict;
 use warnings;
-our $VERSION = '2.0';
+our $VERSION = '2.01';
 use Module::Pluggable search_path => [ __PACKAGE__ ], require => 1;
 my @plugins = __PACKAGE__->plugins(); # Requires them.
 for my $func (qw(get_header get_body 
@@ -98,7 +98,7 @@ automatically picked up and used.
 
 This returns the value or list of values of the given header.
 
-=head2 get_header($obj, $header, @lines)
+=head2 set_header($obj, $header, @lines)
 
 This sets the C<$header> header to the given one or more values.
 
@@ -116,7 +116,9 @@ This returns the whole email as a string.
 
 =head1 AUTHOR
 
-Simon Cozens, E<lt>simon@cpan.orgE<gt>
+Casey West, <F<casey@geeknest.com>>
+
+Simon Cozens, <F<simon@cpan.org>>
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -124,5 +126,9 @@ Copyright 2004 by Simon Cozens
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 
+
+=head1 SEE ALSO
+
+http://pep.kwiki.org
 
 =cut
