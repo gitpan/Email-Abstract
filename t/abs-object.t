@@ -1,32 +1,36 @@
-{
-  package MyMail;
-  use base "Email::Simple";
-}
 
-package main;
-use Test::More tests => 4;
-use Email::Abstract;
+use strict;
+
+use Test::More;
+
+use lib 't/lib';
+
+use Test::EmailAbstract;
+
+my @classes
+  = qw(Email::MIME Email::Simple MIME::Entity Mail::Internet Mail::Message);
+
+plan tests => 6 * @classes  +  6;
+
+use_ok("Email::Abstract");
+
 my $message = do { local $/; <DATA>; };
-my $x = MyMail->new($message);
-like(Email::Abstract->as_string($x), qr/Farley's/, "Round trip with subclass");
 
-my $y = Email::Abstract->new($x);
-isa_ok($y, 'Email::Abstract');
-like($y->as_string, qr/Farley's/, "Round trip subclass via object wrapped");
+SKIP: for my $class (@classes) {
+    eval "require $class";
+    skip "$class can't be loaded", 4 if $@;
 
-{ # should always adapt as if it's MIME::Entity, the nearest class
-  package MultiHopMail;
-  use base "MIME::Entity";
+    my $obj = Email::Abstract->cast($message, $class);
+
+    my $email_abs = Email::Abstract->new($obj);
+
+    isa_ok($email_abs, 'Email::Abstract', "wrapped $class object");
+
+    Test::EmailAbstract::wrapped_ok($class, $email_abs, 0);
 }
 
-# We're digging deep into the guts, here.  Wear gloves.
-# In previous versions, this could return Email::Abstract::MailInternet,
-# because inheritance order was not respected.
-is(
-  Email::Abstract->__class_for('MultiHopMail'),
-  'Email::Abstract::MIMEEntity',
-  "we get the nearest path in inheritance order",
-);
+my $email_abs = Email::Abstract->new($message);
+Test::EmailAbstract::wrapped_ok('plaintext', $email_abs, 0);
 
 __DATA__
 Received: from mailman.opengroup.org ([192.153.166.9])
