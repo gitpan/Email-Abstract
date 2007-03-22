@@ -4,7 +4,7 @@ use Email::Simple;
 use 5.006;
 use strict;
 use warnings;
-our $VERSION = '2.131';
+our $VERSION = '2.132';
 use Module::Pluggable search_path => [ __PACKAGE__ ], require => 1;
 
 my @plugins = __PACKAGE__->plugins(); # Requires them.
@@ -217,7 +217,7 @@ a string.
 
 This module is maintained by the Perl Email Project
 
-  L<http://emailproject.perl.org/wiki/Email::Abstract>
+L<http://emailproject.perl.org/wiki/Email::Abstract>
 
 =head1 AUTHOR
 
