@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Email-Abstract
-version:            3.000
+version:            3.001
 abstract:           ~
 author:  []
 license:            perl
@@ -11,6 +11,7 @@ requires:
     Class::ISA:         0.20
     Email::Simple:      1.91
     Module::Pluggable:  1.5
+    Scalar::Util:       0
     Test::More:         0.47
 no_index:
     directory:
