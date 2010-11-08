@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Email-Abstract
-version:            3.002
+version:            3.003
 abstract:           ~
 author:  []
 license:            perl
@@ -10,9 +10,9 @@ configure_requires:
 build_requires:
     ExtUtils::MakeMaker:  0
 requires:
-    Class::ISA:         0.20
     Email::Simple:      1.91
     Module::Pluggable:  1.5
+    MRO::Compat:        0
     Scalar::Util:       0
     Test::More:         0.47
 no_index:
