@@ -1,5 +1,12 @@
 Revision history for Email-Abstract.
 
+3.005     2013-07-30 09:57:36 America/New_York
+          repackage, update bug tracker, etc.
+
+          provide raw body on multipart Email::MIME messages (thanks,
+          bailey@upenn)
+          [rt.cpan.org #77624]
+
 3.004     2011-02-18
 
           If present, MIME::Entity must be v5.501; v5.500 had a regression (or

@@ -1,5 +1,9 @@
 use strict;
 package Email::Abstract::MIMEEntity;
+{
+  $Email::Abstract::MIMEEntity::VERSION = '3.005';
+}
+# ABSTRACT: Email::Abstract wrapper for MIME::Entity
 
 use Email::Abstract::Plugin;
 BEGIN { @Email::Abstract::MIMEEntity::ISA = 'Email::Abstract::MailInternet' };
@@ -21,7 +25,11 @@ sub construct {
     $parser->parse_data($rfc822);
 }
 
-sub get_body { pop->bodyhandle->as_string }
+sub get_body {
+  my ($self, $obj) = @_;
+  my $handle = $obj->bodyhandle;
+  return $handle ? $handle->as_string : join('', @{ $obj->body });
+}
 
 sub set_body {
     my ($class, $obj, $body) = @_;
@@ -33,9 +41,17 @@ sub set_body {
 
 1;
 
+__END__
+
+=pod
+
 =head1 NAME
 
 Email::Abstract::MIMEEntity - Email::Abstract wrapper for MIME::Entity
+
+=head1 VERSION
+
+version 3.005
 
 =head1 DESCRIPTION
 
@@ -46,5 +62,29 @@ abstract interface, to be used with L<Email::Abstract>
 
 L<Email::Abstract>, L<MIME::Entity>.
 
-=cut
+=head1 AUTHORS
 
+=over 4
+
+=item *
+
+Ricardo SIGNES <rjbs@cpan.org>
+
+=item *
+
+Simon Cozens <simon@cpan.org>
+
+=item *
+
+Casey West <casey@geeknest.com>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2004 by Simon Cozens.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

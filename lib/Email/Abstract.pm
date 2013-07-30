@@ -1,12 +1,16 @@
-require 5.006;
+use 5.006;
 use warnings;
 use strict;
 package Email::Abstract;
+{
+  $Email::Abstract::VERSION = '3.005';
+}
+# ABSTRACT: unified interface to mail representations
 use Carp;
 use Email::Simple;
 use MRO::Compat;
-$Email::Abstract::VERSION = '3.004';
-use Module::Pluggable
+
+use Module::Pluggable 1.5
   search_path => [__PACKAGE__],
   except      => 'Email::Abstract::Plugin',
   require     => 1;
@@ -111,11 +115,18 @@ sub cast {
 }
 
 1;
+
 __END__
+
+=pod
 
 =head1 NAME
 
 Email::Abstract - unified interface to mail representations
+
+=head1 VERSION
+
+version 3.005
 
 =head1 SYNOPSIS
 
@@ -147,9 +158,9 @@ scratch, C<Email::Abstract> can be used to perform certain simple operations on
 an object regardless of its underlying representation.
 
 C<Email::Abstract> currently supports C<Mail::Internet>, C<MIME::Entity>,
-C<Mail::Message>, C<Email::Simple> and C<Email::MIME>.  Other representations
-are encouraged to create their own C<Email::Abstract::*> class by copying
-C<Email::Abstract::EmailSimple>.  All modules installed under the
+C<Mail::Message>, C<Email::Simple>, C<Email::MIME>, and C<Courriel>.  Other
+representations are encouraged to create their own C<Email::Abstract::*> class
+by copying C<Email::Abstract::EmailSimple>.  All modules installed under the
 C<Email::Abstract> hierarchy will be automatically picked up and used.
 
 =head1 METHODS
@@ -235,25 +246,29 @@ Note that, because strings are converted to message objects before wrapping,
 this method will return an object when the Email::Abstract was constructed from
 a string. 
 
-=head1 PERL EMAIL PROJECT
+=head1 AUTHORS
 
-This module is maintained by the Perl Email Project
+=over 4
 
-L<http://emailproject.perl.org/wiki/Email::Abstract>
+=item *
 
-=head1 AUTHOR
+Ricardo SIGNES <rjbs@cpan.org>
 
-Casey West, <F<casey@geeknest.com>>
+=item *
 
-Simon Cozens, <F<simon@cpan.org>>
+Simon Cozens <simon@cpan.org>
 
-Ricardo SIGNES, <F<rjbs@cpan.org>>
+=item *
+
+Casey West <casey@geeknest.com>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004 by Simon Cozens
+This software is copyright (c) 2004 by Simon Cozens.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself. 
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

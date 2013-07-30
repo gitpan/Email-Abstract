@@ -1,23 +1,77 @@
-require 5.006;
+
 use strict;
 use warnings;
-use ExtUtils::MakeMaker;
 
-my $have_mime_entity = eval { require MIME::Entity; 1; };
-my $mime_entity_okay = eval { MIME::Entity->VERSION(5.501); 1 };
+use 5.006;
 
-WriteMakefile(
-  NAME              => 'Email::Abstract',
-  VERSION_FROM      => 'lib/Email/Abstract.pm', # finds $VERSION
-  (eval { ExtUtils::MakeMaker->VERSION(6.21) } ? (LICENSE => 'perl') : ()),
-  PREREQ_PM     => {
-    'MRO::Compat',      => 0,      # minimum unknown
-    'Email::Simple'     => '1.91', # avoid undef body
-    'Module::Pluggable' => '1.5',
-    'Test::More'        => '0.47',
-    'Scalar::Util'      => 0,      # minimum unknown
-    (($have_mime_entity and ! $mime_entity_okay)
-      ? ('MIME::Entity' => '5.501')
-      : ()),
+use ExtUtils::MakeMaker 6.30;
+
+
+
+my %WriteMakefileArgs = (
+  "ABSTRACT" => "unified interface to mail representations",
+  "AUTHOR" => "Ricardo SIGNES <rjbs\@cpan.org>, Simon Cozens <simon\@cpan.org>, Casey West <casey\@geeknest.com>",
+  "BUILD_REQUIRES" => {},
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
+  "DISTNAME" => "Email-Abstract",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "Email::Abstract",
+  "PREREQ_PM" => {
+    "Carp" => "0",
+    "Email::Simple" => "1.191",
+    "MIME::Parser" => "0",
+    "MRO::Compat" => "0",
+    "Module::Pluggable" => "1.5",
+    "Scalar::Util" => "0",
+    "strict" => "0",
+    "warnings" => "0"
+  },
+  "TEST_REQUIRES" => {
+    "File::Find" => "0",
+    "File::Temp" => "0",
+    "Test::More" => "0.96",
+    "lib" => "0"
+  },
+  "VERSION" => "3.005",
+  "test" => {
+    "TESTS" => "t/*.t"
+  }
 );
+
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
+  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
+  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
+  my $pp = $WriteMakefileArgs{PREREQ_PM};
+  for my $mod ( keys %$br ) {
+    if ( exists $pp->{$mod} ) {
+      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
+    }
+    else {
+      $pp->{$mod} = $br->{$mod};
+    }
+  }
+}
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+WriteMakefile(%WriteMakefileArgs);
+
+
+
