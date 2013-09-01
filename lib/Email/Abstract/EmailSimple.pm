@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Email::Abstract::EmailSimple;
 {
-  $Email::Abstract::EmailSimple::VERSION = '3.005';
+  $Email::Abstract::EmailSimple::VERSION = '3.006';
 }
 # ABSTRACT: Email::Abstract wrapper for Email::Simple
 
@@ -54,7 +54,7 @@ Email::Abstract::EmailSimple - Email::Abstract wrapper for Email::Simple
 
 =head1 VERSION
 
-version 3.005
+version 3.006
 
 =head1 DESCRIPTION
 

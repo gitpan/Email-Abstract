@@ -20,22 +20,22 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Email::Abstract",
   "PREREQ_PM" => {
-    "Carp" => "0",
-    "Email::Simple" => "1.191",
-    "MIME::Parser" => "0",
-    "MRO::Compat" => "0",
+    "Carp" => 0,
+    "Email::Simple" => "1.998",
+    "MIME::Parser" => 0,
+    "MRO::Compat" => 0,
     "Module::Pluggable" => "1.5",
-    "Scalar::Util" => "0",
-    "strict" => "0",
-    "warnings" => "0"
+    "Scalar::Util" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "File::Find" => "0",
-    "File::Temp" => "0",
+    "Capture::Tiny" => 0,
     "Test::More" => "0.96",
-    "lib" => "0"
+    "blib" => 0,
+    "lib" => 0
   },
-  "VERSION" => "3.005",
+  "VERSION" => "3.006",
   "test" => {
     "TESTS" => "t/*.t"
   }

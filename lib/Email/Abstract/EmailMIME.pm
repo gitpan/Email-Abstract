@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Email::Abstract::EmailMIME;
 {
-  $Email::Abstract::EmailMIME::VERSION = '3.005';
+  $Email::Abstract::EmailMIME::VERSION = '3.006';
 }
 # ABSTRACT: Email::Abstract wrapper for Email::MIME
 
@@ -29,7 +29,7 @@ Email::Abstract::EmailMIME - Email::Abstract wrapper for Email::MIME
 
 =head1 VERSION
 
-version 3.005
+version 3.006
 
 =head1 DESCRIPTION
 

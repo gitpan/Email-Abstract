@@ -1,7 +1,7 @@
 use strict;
 package Email::Abstract::MailInternet;
 {
-  $Email::Abstract::MailInternet::VERSION = '3.005';
+  $Email::Abstract::MailInternet::VERSION = '3.006';
 }
 # ABSTRACT: Email::Abstract wrapper for Mail::Internet
 
@@ -69,7 +69,7 @@ Email::Abstract::MailInternet - Email::Abstract wrapper for Mail::Internet
 
 =head1 VERSION
 
-version 3.005
+version 3.006
 
 =head1 DESCRIPTION
 

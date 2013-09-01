@@ -1,7 +1,7 @@
 use strict;
 package Email::Abstract::MIMEEntity;
 {
-  $Email::Abstract::MIMEEntity::VERSION = '3.005';
+  $Email::Abstract::MIMEEntity::VERSION = '3.006';
 }
 # ABSTRACT: Email::Abstract wrapper for MIME::Entity
 
@@ -51,7 +51,7 @@ Email::Abstract::MIMEEntity - Email::Abstract wrapper for MIME::Entity
 
 =head1 VERSION
 
-version 3.005
+version 3.006
 
 =head1 DESCRIPTION
 

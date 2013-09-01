@@ -3,7 +3,7 @@ use warnings;
 use strict;
 package Email::Abstract;
 {
-  $Email::Abstract::VERSION = '3.005';
+  $Email::Abstract::VERSION = '3.006';
 }
 # ABSTRACT: unified interface to mail representations
 use Carp;
@@ -126,7 +126,7 @@ Email::Abstract - unified interface to mail representations
 
 =head1 VERSION
 
-version 3.005
+version 3.006
 
 =head1 SYNOPSIS
 

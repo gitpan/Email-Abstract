@@ -1,7 +1,7 @@
 use strict;
 package Email::Abstract::MailMessage;
 {
-  $Email::Abstract::MailMessage::VERSION = '3.005';
+  $Email::Abstract::MailMessage::VERSION = '3.006';
 }
 # ABSTRACT: Email::Abstract wrapper for Mail::Message
 
@@ -54,7 +54,7 @@ Email::Abstract::MailMessage - Email::Abstract wrapper for Mail::Message
 
 =head1 VERSION
 
-version 3.005
+version 3.006
 
 =head1 DESCRIPTION
 
