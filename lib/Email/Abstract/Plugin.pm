@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Email::Abstract::Plugin;
 {
-  $Email::Abstract::Plugin::VERSION = '3.006';
+  $Email::Abstract::Plugin::VERSION = '3.007';
 }
 # ABSTRACT: a base class for Email::Abstract plugins
 
@@ -15,13 +15,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Email::Abstract::Plugin - a base class for Email::Abstract plugins
 
 =head1 VERSION
 
-version 3.006
+version 3.007
 
 =head1 METHODS
 
