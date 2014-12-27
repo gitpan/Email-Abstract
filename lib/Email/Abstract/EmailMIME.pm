@@ -1,11 +1,8 @@
 use strict;
 use warnings;
 package Email::Abstract::EmailMIME;
-{
-  $Email::Abstract::EmailMIME::VERSION = '3.007';
-}
 # ABSTRACT: Email::Abstract wrapper for Email::MIME
-
+$Email::Abstract::EmailMIME::VERSION = '3.008';
 use Email::Abstract::EmailSimple;
 BEGIN { @Email::Abstract::EmailMIME::ISA = 'Email::Abstract::EmailSimple' };
 
@@ -17,7 +14,27 @@ sub construct {
     Email::MIME->new($rfc822);
 }
 
+sub get_body {
+    my ($class, $obj) = @_;
+
+    # Return the same thing you'd get from Email::Simple.
+    #
+    # Ugh.  -- rjbs, 2014-12-27
+    return $obj->body_raw;
+}
+
 1;
+
+#pod =head1 DESCRIPTION
+#pod
+#pod This module wraps the Email::MIME mail handling library with an
+#pod abstract interface, to be used with L<Email::Abstract>
+#pod
+#pod =head1 SEE ALSO
+#pod
+#pod L<Email::Abstract>, L<Email::MIME>.
+#pod
+#pod =cut
 
 __END__
 
@@ -31,7 +48,7 @@ Email::Abstract::EmailMIME - Email::Abstract wrapper for Email::MIME
 
 =head1 VERSION
 
-version 3.007
+version 3.008
 
 =head1 DESCRIPTION
 

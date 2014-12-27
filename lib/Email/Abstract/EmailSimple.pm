@@ -1,11 +1,8 @@
 use strict;
 use warnings;
 package Email::Abstract::EmailSimple;
-{
-  $Email::Abstract::EmailSimple::VERSION = '3.007';
-}
 # ABSTRACT: Email::Abstract wrapper for Email::Simple
-
+$Email::Abstract::EmailSimple::VERSION = '3.008';
 use Email::Abstract::Plugin;
 BEGIN { @Email::Abstract::EmailSimple::ISA = 'Email::Abstract::Plugin' };
 
@@ -44,6 +41,17 @@ sub as_string {
 
 1;
 
+#pod =head1 DESCRIPTION
+#pod
+#pod This module wraps the Email::Simple mail handling library with an
+#pod abstract interface, to be used with L<Email::Abstract>
+#pod
+#pod =head1 SEE ALSO
+#pod
+#pod L<Email::Abstract>, L<Email::Simple>.
+#pod
+#pod =cut
+
 __END__
 
 =pod
@@ -56,7 +64,7 @@ Email::Abstract::EmailSimple - Email::Abstract wrapper for Email::Simple
 
 =head1 VERSION
 
-version 3.007
+version 3.008
 
 =head1 DESCRIPTION
 

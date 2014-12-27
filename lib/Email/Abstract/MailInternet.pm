@@ -1,10 +1,7 @@
 use strict;
 package Email::Abstract::MailInternet;
-{
-  $Email::Abstract::MailInternet::VERSION = '3.007';
-}
 # ABSTRACT: Email::Abstract wrapper for Mail::Internet
-
+$Email::Abstract::MailInternet::VERSION = '3.008';
 use Email::Abstract::Plugin;
 BEGIN { @Email::Abstract::MailInternet::ISA = 'Email::Abstract::Plugin' };
 
@@ -59,6 +56,17 @@ sub as_string { my ($class, $obj) = @_; $obj->as_string(); }
 
 1;
 
+#pod =head1 DESCRIPTION
+#pod
+#pod This module wraps the Mail::Internet mail handling library with an
+#pod abstract interface, to be used with L<Email::Abstract>
+#pod
+#pod =head1 SEE ALSO
+#pod
+#pod L<Email::Abstract>, L<Mail::Internet>.
+#pod
+#pod =cut
+
 __END__
 
 =pod
@@ -71,7 +79,7 @@ Email::Abstract::MailInternet - Email::Abstract wrapper for Mail::Internet
 
 =head1 VERSION
 
-version 3.007
+version 3.008
 
 =head1 DESCRIPTION
 

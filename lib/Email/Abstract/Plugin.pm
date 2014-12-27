@@ -1,11 +1,15 @@
 use strict;
 use warnings;
 package Email::Abstract::Plugin;
-{
-  $Email::Abstract::Plugin::VERSION = '3.007';
-}
 # ABSTRACT: a base class for Email::Abstract plugins
-
+$Email::Abstract::Plugin::VERSION = '3.008';
+#pod =method is_available
+#pod
+#pod This method returns true if the plugin should be considered available for
+#pod registration.  Plugins that return false from this method will not be
+#pod registered when Email::Abstract is loaded.
+#pod
+#pod =cut
 
 sub is_available { 1 }
 
@@ -23,7 +27,7 @@ Email::Abstract::Plugin - a base class for Email::Abstract plugins
 
 =head1 VERSION
 
-version 3.007
+version 3.008
 
 =head1 METHODS
 

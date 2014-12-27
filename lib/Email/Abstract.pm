@@ -2,10 +2,8 @@ use 5.006;
 use warnings;
 use strict;
 package Email::Abstract;
-{
-  $Email::Abstract::VERSION = '3.007';
-}
 # ABSTRACT: unified interface to mail representations
+$Email::Abstract::VERSION = '3.008';
 use Carp;
 use Email::Simple;
 use MRO::Compat;
@@ -116,8 +114,6 @@ sub cast {
 
 1;
 
-__END__
-
 =pod
 
 =encoding UTF-8
@@ -128,7 +124,7 @@ Email::Abstract - unified interface to mail representations
 
 =head1 VERSION
 
-version 3.007
+version 3.008
 
 =head1 SYNOPSIS
 
@@ -274,3 +270,125 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
+
+__END__
+
+#pod =head1 SYNOPSIS
+#pod
+#pod   my $message = Mail::Message->read($rfc822)
+#pod              || Email::Simple->new($rfc822)
+#pod              || Mail::Internet->new([split /\n/, $rfc822])
+#pod              || ...
+#pod              || $rfc822;
+#pod
+#pod   my $email = Email::Abstract->new($message);
+#pod
+#pod   my $subject = $email->get_header("Subject");
+#pod   $email->set_header(Subject => "My new subject");
+#pod
+#pod   my $body = $email->get_body;
+#pod
+#pod   $rfc822 = $email->as_string;
+#pod
+#pod   my $mail_message = $email->cast("Mail::Message");
+#pod
+#pod =head1 DESCRIPTION
+#pod
+#pod C<Email::Abstract> provides module writers with the ability to write
+#pod simple, representation-independent mail handling code. For instance, in the
+#pod cases of C<Mail::Thread> or C<Mail::ListDetector>, a key part of the code
+#pod involves reading the headers from a mail object. Where previously one would
+#pod either have to specify the mail class required, or to build a new object from
+#pod scratch, C<Email::Abstract> can be used to perform certain simple operations on
+#pod an object regardless of its underlying representation.
+#pod
+#pod C<Email::Abstract> currently supports C<Mail::Internet>, C<MIME::Entity>,
+#pod C<Mail::Message>, C<Email::Simple>, C<Email::MIME>, and C<Courriel>.  Other
+#pod representations are encouraged to create their own C<Email::Abstract::*> class
+#pod by copying C<Email::Abstract::EmailSimple>.  All modules installed under the
+#pod C<Email::Abstract> hierarchy will be automatically picked up and used.
+#pod
+#pod =head1 METHODS
+#pod
+#pod All of these methods may be called either as object methods or as class
+#pod methods.  When called as class methods, the email object (of any class
+#pod supported by Email::Abstract) must be prepended to the list of arguments, like
+#pod so:
+#pod
+#pod   my $return = Email::Abstract->method($message, @args);
+#pod
+#pod This is provided primarily for backwards compatibility.
+#pod
+#pod =head2 new
+#pod
+#pod   my $email = Email::Abstract->new($message);
+#pod
+#pod Given a message, either as a string or as an object for which an adapter is
+#pod installed, this method will return a Email::Abstract object wrapping the
+#pod message.
+#pod
+#pod If the message is given as a string, it will be used to construct an object,
+#pod which will then be wrapped.
+#pod
+#pod =head2 get_header
+#pod
+#pod   my $header  = $email->get_header($header_name);
+#pod
+#pod   my @headers = $email->get_header($header_name);
+#pod
+#pod This returns the values for the given header.  In scalar context, it returns
+#pod the first value.
+#pod
+#pod =head2 set_header
+#pod
+#pod   $email->set_header($header => @values);
+#pod
+#pod This sets the C<$header> header to the given one or more values.
+#pod
+#pod =head2 get_body
+#pod
+#pod   my $body = $email->get_body;
+#pod
+#pod This returns the body as a string.
+#pod
+#pod =head2 set_body
+#pod
+#pod   $email->set_body($string);
+#pod
+#pod This changes the body of the email to the given string.
+#pod
+#pod B<WARNING!>  You probably don't want to call this method, despite what you may
+#pod think.  Email message bodies are complicated, and rely on things like content
+#pod type, encoding, and various MIME requirements.  If you call C<set_body> on a
+#pod message more complicated than a single-part seven-bit plain-text message, you
+#pod are likely to break something.  If you need to do this sort of thing, you
+#pod should probably use a specific message class from end to end.
+#pod
+#pod This method is left in place for backwards compatibility.
+#pod
+#pod =head2 as_string
+#pod
+#pod   my $string = $email->as_string;
+#pod
+#pod This returns the whole email as a decoded string.
+#pod
+#pod =head2 cast
+#pod
+#pod   my $mime_entity = $email->cast('MIME::Entity');
+#pod
+#pod This method will convert a message from one message class to another.  It will
+#pod throw an exception if no adapter for the target class is known, or if the
+#pod adapter does not provide a C<construct> method.
+#pod
+#pod =head2 object
+#pod
+#pod   my $message = $email->object;
+#pod
+#pod This method returns the message object wrapped by Email::Abstract.  If called
+#pod as a class method, it returns false.
+#pod
+#pod Note that, because strings are converted to message objects before wrapping,
+#pod this method will return an object when the Email::Abstract was constructed from
+#pod a string. 
+#pod
+#pod =cut

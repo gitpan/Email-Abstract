@@ -1,10 +1,7 @@
 use strict;
 package Email::Abstract::MIMEEntity;
-{
-  $Email::Abstract::MIMEEntity::VERSION = '3.007';
-}
 # ABSTRACT: Email::Abstract wrapper for MIME::Entity
-
+$Email::Abstract::MIMEEntity::VERSION = '3.008';
 use Email::Abstract::Plugin;
 BEGIN { @Email::Abstract::MIMEEntity::ISA = 'Email::Abstract::MailInternet' };
 
@@ -41,6 +38,17 @@ sub set_body {
 
 1;
 
+#pod =head1 DESCRIPTION
+#pod
+#pod This module wraps the MIME::Entity mail handling library with an
+#pod abstract interface, to be used with L<Email::Abstract>
+#pod
+#pod =head1 SEE ALSO
+#pod
+#pod L<Email::Abstract>, L<MIME::Entity>.
+#pod
+#pod =cut
+
 __END__
 
 =pod
@@ -53,7 +61,7 @@ Email::Abstract::MIMEEntity - Email::Abstract wrapper for MIME::Entity
 
 =head1 VERSION
 
-version 3.007
+version 3.008
 
 =head1 DESCRIPTION
 
